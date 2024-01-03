@@ -5,14 +5,17 @@
     <title>DSD + DOMParser demo</title>
 
     <style>
-      h1 {
+      h1, p {
         text-align: center;
+        min-height: 25px;
       }
 
       button {
         display: block;
         margin: 20px auto;
-        width: 10%;
+        width: 20%;
+        min-height: 50px;;
+        border-radius: 10px;
       }
     </style>
 
@@ -20,17 +23,37 @@
     <script type="module" src="./components/greeting-template.js"></script>
 
     <script>
+      function getDSD(type) {
+        return `
+          <greeting-${type}>
+            <template shadowrootmode="open">
+              <div>
+                <h2>Hello ${type}!</h2>
+              </div>
+            </template>
+          </greeting-${type}>
+        `
+      }
+
       function loadDemo(type, includeShadowRoots) {
-        console.log('loadDemo', { type, includeShadowRoots });
+        console.log('loadDemo =>', { type, includeShadowRoots });
+        const html = getDSD(type);
+        const fragment = new DOMParser().parseFromString(html, 'text/html', { includeShadowRoots });
+
+        console.log({ html, fragment });
+        document.getElementById('output').innerHTML = fragment.body.innerHTML;
       }
 
       globalThis.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('button')
+        document
+          .querySelectorAll('button.demo')
           .forEach((button) => {
             const [ type, includeShadowRoots ] =   button.id.split('-');
+            const shouldInclude = includeShadowRoots === 'true' ? true : false;
 
             button.addEventListener('click', () => {
-              loadDemo(type, includeShadowRoots);
+
+              loadDemo(type, shouldInclude);
             });
           });
       })
@@ -41,12 +64,12 @@
   <body>
     <h1>DSD + DOMParser demo</h1>
 
-    <button id="template-true">Template (true)</button>
-    <button id="template-false">Template (false)</button>
-    <button id="inline-true">Template (true)</button>
-    <button id="inline-false">Template (false)</button>
+    <p id="output"></p>
 
-    <div id="output"></div>
+    <button class="demo" id="template-true">Template (true) - no warning</button>
+    <button class="demo" id="template-false">Template (false) - warning from setting innerHTML to the output</button>
+    <button class="demo" id="inline-true">Inline (true) - warning from setting innerHTML in the component</button>
+    <button class="demo" id="inline-false">Inline (false) - warning from setting innerHTML to the output AND the component</button>
   </body>
   
 </html>

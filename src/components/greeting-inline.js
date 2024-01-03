@@ -4,9 +4,11 @@ export default class GreetingInline extends HTMLElement {
     if (!this.shadowRoot) {
       this.attachShadow({ mode: 'open' });
       this.shadowRoot.innerHTML = `
-        <div>
-          <h2>Hello Inline!</h2>
-        </div>
+        <template shadowrootmode="open">
+          <div>
+            <h2>Hello inline!</h2>
+          </div>
+        </template>
       `
     }
   }

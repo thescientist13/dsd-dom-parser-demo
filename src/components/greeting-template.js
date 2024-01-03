@@ -6,7 +6,7 @@ export default class GreetingTemplate extends HTMLElement {
 
       template.innerHTML = `
         <div>
-          <h2>Hello Template!</h2>
+          <h2>Hello template!</h2>
         </div>
       `;
       this.attachShadow({ mode: 'open' });
@@ -15,4 +15,4 @@ export default class GreetingTemplate extends HTMLElement {
   }
 }
 
-customElements.define('app-greeting', GreetingTemplate);
+customElements.define('greeting-template', GreetingTemplate);

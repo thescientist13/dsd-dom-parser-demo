@@ -9,7 +9,8 @@
   "license": "ISC",
   "scripts": {
     "build": "greenwood build",
-    "dev": "greenwood develop"
+    "dev": "greenwood develop",
+    "start": "npm run dev"
   },
   "devDependencies": {
     "@greenwood/cli": "^0.29.1"
