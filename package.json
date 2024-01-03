@@ -1,0 +1,17 @@
+{
+  "name": "dsd-dom-parser-demo",
+  "description": "A demo repo of techniques for injecting SSR Declarative Shadow DOM into a page using DOMParser",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thescientist13/dsd-dom-parser-demo.git"
+  },
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "license": "ISC",
+  "scripts": {
+    "build": "greenwood build",
+    "dev": "greenwood develop"
+  },
+  "devDependencies": {
+    "@greenwood/cli": "^0.29.1"
+  }
+}

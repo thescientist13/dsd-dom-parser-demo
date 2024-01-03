@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>DSD + DOMParser demo</title>
+
+    <style>
+      h1 {
+        text-align: center;
+      }
+
+      button {
+        display: block;
+        margin: 20px auto;
+        width: 10%;
+      }
+    </style>
+
+    <script type="module" src="./components/greeting-inline.js"></script>
+    <script type="module" src="./components/greeting-template.js"></script>
+
+    <script>
+      function loadDemo(type, includeShadowRoots) {
+        console.log('loadDemo', { type, includeShadowRoots });
+      }
+
+      globalThis.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('button')
+          .forEach((button) => {
+            const [ type, includeShadowRoots ] =   button.id.split('-');
+
+            button.addEventListener('click', () => {
+              loadDemo(type, includeShadowRoots);
+            });
+          });
+      })
+    </script>
+    
+  </head>
+
+  <body>
+    <h1>DSD + DOMParser demo</h1>
+
+    <button id="template-true">Template (true)</button>
+    <button id="template-false">Template (false)</button>
+    <button id="inline-true">Template (true)</button>
+    <button id="inline-false">Template (false)</button>
+
+    <div id="output"></div>
+  </body>
+  
+</html>
